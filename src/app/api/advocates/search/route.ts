@@ -9,6 +9,7 @@ import {
   eq,
   or,
   arrayOverlaps,
+  count,
 } from "drizzle-orm";
 import { SearchParams } from "@custom-types/search";
 
@@ -169,10 +170,7 @@ export async function POST(request: Request) {
 
     const queryPromise = Promise.all([
       query,
-      db
-        .select({ count: sql`count(*)` })
-        .from(advocates)
-        .where(whereClause),
+      db.select({ count: count() }).from(advocates).where(whereClause),
     ]);
 
     const timeoutPromise = new Promise((_, reject) =>

@@ -1,6 +1,6 @@
 import db from "@db";
 import { advocates } from "@db/schema";
-import { sql } from "drizzle-orm";
+import { count } from "drizzle-orm";
 
 export async function GET(request: Request) {
   try {
@@ -28,7 +28,7 @@ export async function GET(request: Request) {
 
     const [data, countResult] = await Promise.all([
       db.select().from(advocates).limit(limit).offset(offset),
-      db.select({ count: sql`count(*)` }).from(advocates),
+      db.select({ count: count() }).from(advocates),
     ]);
 
     return Response.json({
