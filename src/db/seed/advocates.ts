@@ -1,34 +1,4 @@
-import db from "..";
-import { advocates } from "../schema";
-
-const specialties = [
-  "Bipolar",
-  "LGBTQ",
-  "Medication/Prescribing",
-  "Suicide History/Attempts",
-  "General Mental Health (anxiety, depression, stress, grief, life transitions)",
-  "Men's issues",
-  "Relationship Issues (family, friends, couple, etc)",
-  "Trauma & PTSD",
-  "Personality disorders",
-  "Personal growth",
-  "Substance use/abuse",
-  "Pediatrics",
-  "Women's issues (post-partum, infertility, family planning)",
-  "Chronic pain",
-  "Weight loss & nutrition",
-  "Eating disorders",
-  "Diabetic Diet and nutrition",
-  "Coaching (leadership, career, academic and wellness)",
-  "Life coaching",
-  "Obsessive-compulsive disorders",
-  "Neuropsychological evaluations & testing (ADHD testing)",
-  "Attention and Hyperactivity (ADHD)",
-  "Sleep issues",
-  "Schizophrenia and psychotic disorders",
-  "Learning disorders",
-  "Domestic abuse",
-];
+import { specialties as groupedSpecialties } from "@db/seed/specialties";
 
 const randomSpecialty = () => {
   const random1 = Math.floor(Math.random() * 24);
@@ -36,6 +6,8 @@ const randomSpecialty = () => {
 
   return [random1, random2];
 };
+
+const specialties = Object.values(groupedSpecialties).flat();
 
 const advocateData = [
   {
