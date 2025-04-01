@@ -1,10 +1,10 @@
 export type Advocate = {
-  id: string;
+  id: number;
   firstName: string;
   lastName: string;
   city: string;
   degree: string;
   specialties: string[];
-  yearsOfExperience: string;
+  yearsOfExperience: number;
   phoneNumber: number;
 };

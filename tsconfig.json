@@ -21,8 +21,14 @@
       "@/*": ["./src/*"],
       "@custom-types/*": ["./src/app/types/*"],
       "@components/*": ["./src/app/components/*"],
-      "@api/*": ["./src/app/api/*"]
-    }
+      "@advocates/*": ["./src/app/components/advocates/*"],
+      "@common/*": ["./src/app/components/common/*"],
+      "@types/*": ["./src/app/types/*"],
+      "@api/*": ["./src/app/api/*"],
+      "@libs/*": ["./src/app/libs/*"],
+      "@db/*": ["./src/db/*"],
+      "@db": ["./src/db"]
+    },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
