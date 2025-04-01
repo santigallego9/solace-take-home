@@ -1,12 +1,15 @@
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
-type SpecialtiesCellProps = {
+export type AdvocatesSpecialtiesCellProps = {
   specialties: string[];
 };
 
 const MAX_CHARS = 75;
 
-export const SpecialtiesCell = ({ specialties }: SpecialtiesCellProps) => {
+export const AdvocatesSpecialtiesCell = ({
+  specialties,
+}: AdvocatesSpecialtiesCellProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getPreviewText = () => {
@@ -41,7 +44,6 @@ export const SpecialtiesCell = ({ specialties }: SpecialtiesCellProps) => {
   };
 
   const preview = getPreviewText();
-
   return (
     <>
       <div
@@ -63,7 +65,7 @@ export const SpecialtiesCell = ({ specialties }: SpecialtiesCellProps) => {
                 onClick={() => setIsModalOpen(false)}
                 className="text-gray-500 hover:text-gray-700"
               >
-                ✕
+                <XMarkIcon className="h-5 w-5" />
               </button>
             </div>
             <div className="max-h-[60vh] overflow-y-auto">
