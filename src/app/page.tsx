@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import type { Advocate } from "@custom-types/advocate";
+import { useEffect, useState, ChangeEvent } from "react";
+import { AdvocatesTable } from "@components/advocates/AdvocatesTable";
 
 export default function Home() {
-  const [advocates, setAdvocates] = useState([]);
-  const [filteredAdvocates, setFilteredAdvocates] = useState([]);
+  const [advocates, setAdvocates] = useState<Advocate[]>([]);
+  const [filteredAdvocates, setFilteredAdvocates] = useState<Advocate[]>([]);
 
   useEffect(() => {
     console.log("fetching advocates...");
@@ -16,10 +18,13 @@ export default function Home() {
     });
   }, []);
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchTerm = e.target.value;
 
-    document.getElementById("search-term").innerHTML = searchTerm;
+    const searchElement = document.getElementById("search-term");
+    if (searchElement) {
+      searchElement.innerHTML = searchTerm;
+    }
 
     console.log("filtering advocates...");
     const filteredAdvocates = advocates.filter((advocate) => {
@@ -43,49 +48,29 @@ export default function Home() {
 
   return (
     <main style={{ margin: "24px" }}>
-      <h1>Solace Advocates</h1>
-      <br />
-      <br />
-      <div>
-        <p>Search</p>
-        <p>
-          Searching for: <span id="search-term"></span>
+      <h1 className="text-3xl font-bold text-gray-800">Solace Advocates</h1>
+
+      <div className="my-6">
+        <p className="text-lg font-medium">Search</p>
+        <p className="mb-2">
+          Searching for:{" "}
+          <span id="search-term" className="font-semibold"></span>
         </p>
-        <input style={{ border: "1px solid black" }} onChange={onChange} />
-        <button onClick={onClick}>Reset Search</button>
+        <div className="flex gap-2">
+          <input
+            className="search-input"
+            onChange={onChange}
+            placeholder="Search advocates..."
+          />
+          <button className="button-primary" onClick={onClick}>
+            Reset Search
+          </button>
+        </div>
       </div>
-      <br />
-      <br />
-      <table>
-        <thead>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>City</th>
-          <th>Degree</th>
-          <th>Specialties</th>
-          <th>Years of Experience</th>
-          <th>Phone Number</th>
-        </thead>
-        <tbody>
-          {filteredAdvocates.map((advocate) => {
-            return (
-              <tr>
-                <td>{advocate.firstName}</td>
-                <td>{advocate.lastName}</td>
-                <td>{advocate.city}</td>
-                <td>{advocate.degree}</td>
-                <td>
-                  {advocate.specialties.map((s) => (
-                    <div>{s}</div>
-                  ))}
-                </td>
-                <td>{advocate.yearsOfExperience}</td>
-                <td>{advocate.phoneNumber}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+
+      <AdvocatesTable advocates={filteredAdvocates} />
+
+      <div className="overflow-x-auto rounded-lg shadow"></div>
     </main>
   );
 }
